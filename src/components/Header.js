@@ -8,6 +8,7 @@ import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import MessageIcon from '@material-ui/icons/Message';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import {Avatar} from '@material-ui/core';
+import DropDown from './'
 export default function Header() {
   return (
     <div className='header'>
@@ -28,6 +29,7 @@ export default function Header() {
            <HeaderOptions Icon={MessageIcon} title="Messaging"/>
            <HeaderOptions Icon={NotificationsIcon} title="Notifications"/>
            <HeaderOptions avatar={Avatar} title="Rahul Singh"/>
+           <DropDown />
        </div>
     </div>
   )
