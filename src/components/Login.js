@@ -4,19 +4,19 @@ import { updateProfile } from 'firebase/auth';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { loginuser, selectUser } from './UserSlice';
-import {useSelector}  from 'react-redux';
-import { current } from '@reduxjs/toolkit';
+import { useLocation } from 'react-router-dom';
 
 
 export default function Login() {
 
     const [signUp,setSignUp]=useState(false);
     const [name,setName]=useState("");
-    const [photoUrl,setPhotoUrl]=useState("");
+    const [photoURL,setPhotoURL]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
     const dispatch=useDispatch();
-    const user=useSelector(selectUser);
+   
+    
 
     const register=(e)=>{
      e.preventDefault();
@@ -30,7 +30,7 @@ export default function Login() {
      if(!password){
       return alert("Password is required");
      }
-     if(!photoUrl){
+     if(!photoURL){
       return alert("PhotoUrl is required");
      }
       
@@ -38,28 +38,34 @@ export default function Login() {
      
       auth.createUserWithEmailAndPassword(email,password).then((userAuth)=>{
 
-          userAuth.user.updateProfile(user,{
+        console.log(userAuth)
 
-            displayName:name,
-            photoUrl:photoUrl
+
+       
+
+         userAuth.updateProfile({
+
+           displayName:name,
+            photoURL:photoURL
            }).then(()=>{
-
+        
                   dispatch(loginuser({
 
-                     email:userAuth.user.email,
-                     uid:userAuth.user.uid,
-                     photoUrl:photoUrl,
-                     displayName:name
+                     email:userAuth.email,
+                     uid:userAuth.uid,
+                     photoURL:userAuth.photoURL,
+                     displayName:userAuth.name
                     
 
                   })) 
 
-          })
+                 } )
+               
 
       }).catch(error=>alert(error));
 
       setName("");
-      setPhotoUrl("");
+      setPhotoURL("");
       setEmail("");
       setPassword("");
 
@@ -79,20 +85,24 @@ export default function Login() {
      }
 
 
-    auth.signInWithEmailAndPassword(email,password).then(({user})=>{
-
+     auth.signInWithEmailAndPassword(email, password)
+     .then((user) => {
+     
+       
       dispatch(loginuser({
 
-        email:user.email,
-        uid:user.uid,
-        photoUrl:user.photoUrl,
-        displayName:user.displayName
-       
+                     email:user.email,  
+                     uid:user.uid,
+                     photoURL:user.photoURL,
+                     displayName:user.name
+                    
+      }))
+                  
+     })
+     .catch(error=>alert(error))
 
-     })) 
-
-    })
-
+    //  setEmail("");
+    //  setPassword("");
     }
   return (
 <>
@@ -107,19 +117,19 @@ export default function Login() {
         
              <input type="text" placeholder='Full Name' value={name} onChange={(e)=>setName(e.target.value)}  />
              
-             <input type="text" placeholder='Profile picture url' value={photoUrl} onChange={(e)=>setPhotoUrl(e.target.value)} />
+             <input type="text" placeholder='Profile picture url' value={photoURL} onChange={(e)=>setPhotoURL(e.target.value)} />
              
              <input type="email" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)}  />
              
              <input type="password" placeholder='Password'value={password} onChange={(e)=>setPassword(e.target.value)}  />
              
-             <input type="submit" placeholder='Sign Up'  />
+             <input type="submit" placeholder='Sign Up'   />
              
              <h4>Already a member ? <span onClick={e=>setSignUp(false)}>Login Here</span></h4>
              
              
              </form>  ):
-             (<form >
+             (<form onSubmit={signIn} >
         
         
              <input type="email" placeholder='Email'   onChange={(e)=>setEmail(e.target.value)}/>
@@ -127,6 +137,7 @@ export default function Login() {
              <input type="password" placeholder='Password'  onChange={(e)=>setPassword(e.target.value)} />
              
              <input type="submit" placeholder='Sign In' />
+             
              
              <h4>Not a member ? <span onClick={e=>setSignUp(true)}>Register Here</span></h4>
              

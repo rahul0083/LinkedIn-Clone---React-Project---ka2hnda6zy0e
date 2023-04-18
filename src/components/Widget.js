@@ -14,23 +14,23 @@ export default function Widget() {
           <ul className="widget__options">
             <li>
                 <h4>Startup brace for SVB impact</h4>
-                <p>2d ago * 2535 readers</p>
+                <p>1d ago * 2535 readers</p>
             </li>
             <li>
-                <h4>Startup brace for SVB impact</h4>
-                <p>2d ago * 2535 readers</p>
+                <h4>Lenskart bucks funding trend</h4>
+                <p>1d ago * 3564 readers</p>
             </li>
             <li>
-                <h4>Startup brace for SVB impact</h4>
-                <p>2d ago * 2535 readers</p>
+                <h4>Microsoft is bringing AI to office.</h4>
+                <p>2d ago * 6575 readers</p>
             </li>
             <li>
-                <h4>Startup brace for SVB impact</h4>
-                <p>2d ago * 2535 readers</p>
+                <h4>Aviation giants bet big on India</h4>
+                <p>2d ago * 5373readers</p>
             </li>
             <li>
-                <h4>Startup brace for SVB impact</h4>
-                <p>2d ago * 2535 readers</p>
+                <h4>$54B lifeline for credit suisse</h4>
+                <p>3d ago * 3263 readers</p>
             </li>
           </ul>
    </div>
@@ -43,12 +43,12 @@ export default function Widget() {
     <div className="widget__body">
         <ul className="widget__options">
         <li>
-                <h4>Startup brace for SVB impact</h4>
-                <p>2d ago * 2535 readers</p>
+                <h4>. Goal Setting: Objectives and Key Results (OKRs) with Jessie Withers</h4>
+                <p>1d ago * 4336 readers</p>
             </li>
             <li>
-                <h4>Startup brace for SVB impact</h4>
-                <p>2d ago * 2535 readers</p>
+                <h4> Interpersonal Communication with Dorie Clark</h4>
+                <p>2d ago * 3423 readers</p>
             </li>
         </ul>
     </div>

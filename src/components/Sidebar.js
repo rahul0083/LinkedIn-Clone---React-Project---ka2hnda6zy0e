@@ -1,8 +1,16 @@
 import React from 'react'
 import '../styles/App.css';
 import {Avatar} from '@material-ui/core';
+import firebase from 'firebase';
+import { useSelector } from 'react-redux';
+import { selectUser } from './UserSlice';
 
 export default function Sidebar() {
+
+  const user = firebase.auth().currentUser;
+
+  // Then get the username by using:
+  const name = user.displayName;
   return (
     <div className='sidebar'>
       <div className="sidebar__profile">
@@ -10,8 +18,8 @@ export default function Sidebar() {
         <img src='https://healthyresumes.com/wp-content/uploads/2022/10/LinkedIn-Background-Photo-17-1.webp' />
        
         <div className="profile__details">
-        <Avatar src=''/>
-        <h4>Rahul Singh</h4>
+        <Avatar src={user.photoURL}/>
+        <h4>{name}</h4>
         <p>Web Developer</p>
 
         </div>

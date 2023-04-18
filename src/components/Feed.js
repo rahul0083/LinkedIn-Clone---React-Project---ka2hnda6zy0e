@@ -7,24 +7,35 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import Post from './Post';
 import { db } from './Firebase';
 import firebase from "firebase";
-
+import { useSelector } from 'react-redux';
+import { selectUser } from './UserSlice';
+import Timestamp from 'firebase/firestore'
 
 
 export default function Feed() {
+
+  const user = firebase.auth().currentUser;
+
   const [posts,setPost]=useState([]);
   const [input,setInput]=useState();
+
   const submitPost=(e)=>{
      e.preventDefault();
      db.collection("posts").add({
-       name:"Rahul Singh",
+       name:user.displayName,
        description:"Web developer",
        message:input,
-       photoUrl:'',
-        timestamp:firebase.firestore.FieldValue.serverTimestamp()
+       photoUrl:user.photoURL,
+       createdAt:new Date().toLocaleString() + "",
+       timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+       likes:[],
+       comments:[]
       
      });
      setInput("");
 }
+
+
 
 useEffect(()=>{
 db.collection("posts").orderBy("timestamp","desc").onSnapshot(snapshot=>{
@@ -37,11 +48,13 @@ setPost(snapshot.docs.map(doc=>({
 
 })
 },[])
+
+
   return (
     <div className='feed'>
       <div className="feed__input">
         <div className="feed__form">
-      <Avatar src='' />
+      <Avatar src={user.photoURL} />
       <form onSubmit={submitPost}>
         <input type="text" placeholder='Start a post' value={input} onChange={e=>setInput(e.target.value)}/>
         <input type="submit" />
@@ -66,17 +79,17 @@ setPost(snapshot.docs.map(doc=>({
           <span>Write article</span>
         </div>
       </div>
+      
       </div>
-
-     { posts.map(({id , data : {name,description,message,photoUrl}})=>{
+    
+     { posts.map(({id , data : {name,description,message,photoUrl,comment,createdAt,likes}})=>{
 
         return <Post key={id} name={name} description={description} message={message}
-        photoUrl={photoUrl} />
+        photoUrl={photoUrl} comment={comment} createdAt={createdAt} likes={likes} />
       })
     }
-    
-      
-      
+            
+   
     </div>
   )
 }
