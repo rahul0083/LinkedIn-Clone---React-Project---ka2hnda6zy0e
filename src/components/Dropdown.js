@@ -12,6 +12,7 @@ export default function Dropdown() {
     const signout=()=>{
     
      dispatch(logoutuser())
+     window.localStorage.clear();   //clear local storage
 
     }
   return (
