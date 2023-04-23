@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
- import {RouterProvider} from "react-router-dom";
-import {router}  from '../Routes/routes'
-import {firebaseApp} from '../src/components/Firebase'
+ import App from "./components/App";
+ import  Store  from "./app/Store";
+ import { Provider } from "react-redux";
 
+
+ 
 
 ReactDOM.render(
 <React.StrictMode>
+<Provider store={Store} >
+  <App/>
 
-<RouterProvider router={router} />
-
+  </Provider>
 </React.StrictMode>,
 document.getElementById("root")
 
