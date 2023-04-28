@@ -8,12 +8,12 @@ import ReactDOM from "react-dom";
  
 
 ReactDOM.render(
-<React.StrictMode>
+/* <React.StrictMode> */
 <Provider store={Store} >
   <App/>
 
-  </Provider>
-</React.StrictMode>,
+  </Provider>,
+// </React.StrictMode>
 document.getElementById("root")
 
 );
