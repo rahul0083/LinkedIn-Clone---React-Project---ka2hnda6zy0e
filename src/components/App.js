@@ -19,29 +19,29 @@ const App = () => {
   
    const user=useSelector(selectUser)
 
-// const dispatch=useDispatch();
+const dispatch=useDispatch();
 
-// useEffect(()=>{
+useEffect(()=>{
 
-//   auth.onAuthStateChanged(userAuth=>{
-//      if(userAuth){
-//       dispatch(loginuser({
+  auth.onAuthStateChanged(userAuth=>{
+     if(userAuth){
+      dispatch(loginuser({
 
-//         email:userAuth.email,
-//         uid:userAuth.uid,
-//         photoURL:userAuth.photoURL,
-//         displayName:userAuth.displayName
+        email:userAuth.email,
+        uid:userAuth.uid,
+        photoURL:userAuth.photoURL,
+        displayName:userAuth.displayName
        
 
-//      }))
-//      }
-//      else{
-//          dispatch(logoutuser())
-//      }
+     }))
+     }
+     else{
+         dispatch(logoutuser())
+     }
 
-//   })
+  })
  
-// },[dispatch])
+},[dispatch])
 
 
   return (
